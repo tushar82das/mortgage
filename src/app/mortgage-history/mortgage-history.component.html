@@ -1,0 +1,25 @@
+<h2>Loan History</h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>No#</th>
+      <th>Mortgage Type</th>
+      <th>Property Size(In Sqft)</th>
+      <th>Property Area Code</th>
+      <th>Sqft Price(In INR)</th>
+      <th>Loan Amount(In INR)</th>
+      <th>Loan Tenure(In Months)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let loan of loans; let i = index">
+      <td>{{i}}</td>
+      <td>{{loan.mortgageType}}</td>
+      <td>{{loan.propertySize}}</td>
+      <td>{{loan.propertyAreaCode}}</td>
+      <td>{{loan.sqftPrice}}</td>
+      <td>{{loan.loanAmount}}</td>
+      <td>{{loan.loanTenure}}</td>
+    </tr>
+  </tbody>
+</table>

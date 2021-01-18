@@ -1,0 +1,70 @@
+<div class="row" style="text-align:left; padding-top: 20px;">
+  <div class="col-sm-2"></div>
+  <div class="col-sm-8">
+    <div *ngIf="!isChecked">
+      <h2>Mortgage Loan Form</h2>
+      <hr>
+      <form [formGroup]="loanForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="mortgageType">Select Mortgage Type:</label>
+          <select class="form-control" id="mortgageType" formControlName="mortgageType">
+            <option value="">--Select--</option>
+            <option value="New Property">New Property</option>
+            <option value="Existing Property">Existing Property</option>
+            <option value="Existing with re-finance">Existing with re-finance</option>
+          </select>
+        </div>
+        <div class="form-group has-error">
+          <label for="propertySize">Property Size(In Sqft):</label>
+          <input type="number" class="form-control" id="propertySize" formControlName="propertySize">
+        </div>
+        <div class="form-group">
+          <label for="propertyAreaCode">Property Area Code:</label>
+          <input list="property-area-codes" class="form-control" id="propertyAreaCode" formControlName="propertyAreaCode">
+          <datalist id="property-area-codes">
+            <option *ngFor="let areaCode of areaCodes" value="{{areaCode.code}}">
+          </datalist>
+        </div>
+        <div class="form-group">
+          <label for="loanAmount">Loan Amount(In INR):</label>
+          <input type="number" class="form-control" id="loanAmount" formControlName="loanAmount">
+        </div>
+        <div class="form-group">
+          <label for="loanTenure">Loan Tenure(In Months):</label>
+          <input type="number" class="form-control" id="loanTenure" formControlName="loanTenure">
+        </div>
+        <hr>
+        <button type="submit" class="btn btn-primary" style="float:right;">Check Eligibility</button>
+      </form>
+    </div>
+    <div *ngIf="isChecked">
+      <div *ngIf="isAppliedSuccess">
+        <h2>You Have Applied Loan Successfully !!</h2>
+      </div>
+      <div *ngIf="!isAppliedSuccess">
+        <h2>Confirmation</h2>
+        <hr>
+        <div class="panel-group">
+          <div class="panel panel-primary">
+            <div class="panel-body">
+              <div>
+                <strong>Mortgage Type</strong>: {{mortgageType}} <br>
+                <strong>Property Size</strong>: {{propertySize}} Sqft<br>
+                <strong>Property AreaCode</strong>: {{propertyAreaCode}} <br>
+                <strong>Current valuation of Property: </strong>: {{propertySize*sqftPrice | currency:'INR'}}<br><br>
+                <strong>Loan Amount</strong>: {{loanAmount | currency:'INR'}}<br>
+                <strong>Loan Tenure</strong>: {{loanTenure}} Months<br>
+
+              </div>
+              <div style="text-align:right;">
+                <button type="button" class="btn btn-primary" (click)="goBack()">Cancel</button> |
+                <button type="button" class="btn btn-primary" (click)="applyLoan()">Apply Loan</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-2"></div>
+</div>
